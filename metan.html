@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uz Metan Zapravkasi - Sifatli va Xavfsiz Yonilg'i</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Ikonkalar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧱</text></svg>">
+    <style>
+        /* Banner bo'limi */
+        .page-header {
+            position: relative;
+            padding: 90px 0;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80');
+            background-position: center;
+            background-size: cover;
+            filter: blur(5px);
+            transform: scale(1.1);
+            z-index: 1;
+        }
+
+        .page-header .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Kartochkalar dizayni */
+        .feature-card {
+            border: none;
+            border-radius: 12px;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background-color: #fff3cd;
+            color: #ffc107;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            margin-bottom: 20px;
+        }
+
+        /* Footer havolalariga hover */
+        footer a {
+            transition: color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+        footer a:hover {
+            color: #ffc107 !important;
+            transform: translateX(3px);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. NAVIGATION BAR (ASOSIY SAHIFADAGI BILAN BIR XIL) -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+        <div class="container">
+            <!-- Ikonka (<i>) o'rniga logo (<img>) qo'shildi -->
+            <a class="navbar-brand d-flex align-items-center fw-bold text-warning fs-3" href="index.html">
+                <img src="logo.png" alt="Uz Brend Logo" class="me-2" style="height: 45px; width: auto; object-fit: contain;">
+                <span style="color: #910e0d;">Uz Brend G'ishtlari</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Bosh sahifa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gisht.html">Uz Brend G'ishtlari</a></li>
+                    <li class="nav-item"><a class="nav-link" href="beton.html">Uz Beton Mahsulotlari</a></li>
+                    <li class="nav-item"><a class="nav-link" href="xitoy.html">Xitoy Stanoklari</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="metan.html">Metan Zapravka</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. SAHIFA SARLAVHASI (BANNER) -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="fw-bold display-4 text-warning">Uz Metan Zapravkasi</h1>
+            <p class="lead">Sifatli metan gazi, yuqori bosim va a'lo darajadagi xizmat ko'rsatish</p>
+        </div>
+    </header>
+
+    <!-- 3. MAIN STATS / AFZALLIKLAR -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row g-4 text-center justify-content-center">
+
+                <!-- 1-Afzallik -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="card feature-card shadow-sm h-100 p-4 align-items-center">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-gauge-high"></i>
+                        </div>
+                        <h5 class="fw-bold">Barqaror Bosim</h5>
+                        <p class="text-muted small mb-0">Doimiy 200 BAR bosim ta'minlanadi, avtomobilingiz to'liq va tez to'ladi.</p>
+                    </div>
+                </div>
+
+                <!-- 2-Afzallik -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="card feature-card shadow-sm h-100 p-4 align-items-center">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-clock"></i>
+                        </div>
+                        <h5 class="fw-bold">24/7 Ish Rejimi</h5>
+                        <p class="text-muted small mb-0">Zapravkamiz dam olish kunlarisiz, kuniga 24 soat uzluksiz xizmat ko'rsatadi.</p>
+                    </div>
+                </div>
+
+                <!-- 3-Afzallik -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="card feature-card shadow-sm h-100 p-4 align-items-center">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
+                        <h5 class="fw-bold">Yuqori Xavfsizlik</h5>
+                        <p class="text-muted small mb-0">Zamonaviy kompressorlar va tajribali operatorlar orqali 100% xavfsizlik.</p>
+                    </div>
+                </div>
+
+                <!-- 4-Afzallik -->
+                <div class="col-md-3 col-sm-6">
+                    <div class="card feature-card shadow-sm h-100 p-4 align-items-center">
+                        <div class="feature-icon">
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </div>
+                        <h5 class="fw-bold">Qulay Xizmatlar</h5>
+                        <p class="text-muted small mb-0">Haydovchilar uchun muzdek suvlar, namozxona va toza hojatxona mavjud.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. QUSHIMCHA QULAYLIKLAR VA MANZIL (MAP) -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <h2 class="fw-bold text-dark mb-4">Haydovchilar uchun barcha qulayliklar bitta joyda</h2>
+                    <p class="text-muted mb-4">
+                        Zapravkamizda navbatda turganingizda yoki avtomobilingizga gaz to'ldirilayotgan vaqtda hordiq chiqarishingiz uchun barcha sharoitlarni yaratganmiz:
+                    </p>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex align-items-center"><i class="fa-solid fa-circle-check text-warning fs-5 me-3"></i> <span><strong>Muzdek-suv va salon aromatizatorlari:</strong> Kalit breloklari va salon hushboylantiruvchilari.</span></li>
+                        <li class="mb-3 d-flex align-items-center"><i class="fa-solid fa-circle-check text-warning fs-5 me-3"></i> <span><strong>Namozxona:</strong> Barcha sharoitlarga ega shinam va ozoda namozxona.</span></li>
+                        <li class="mb-3 d-flex align-items-center"><i class="fa-solid fa-circle-check text-warning fs-5 me-3"></i> <span><strong>To'lov qulayligi:</strong> Naqd pul, Click, Payme va Humo/Uzcard terminallar.</span></li>
+                    </ul>
+                    <a href="https://www.google.com/maps/place/Metan+%22Rishton+Shox+Gaz+Oil%22/@40.4292676,71.2416768,16z/data=!4m6!3m5!1s0x38bb01ae034d911b:0x223f825dea1fe5e9!8m2!3d40.4258592!4d71.2350665!16s%2Fg%2F11q3n7gszz?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="btn btn-warning fw-bold btn-lg mt-2">
+                        <i class="fa-solid fa-location-arrow me-2"></i> Xaritada joylashuvni ko'rish
+                    </a>
+                </div>
+
+                <!-- Xarita vizual qismi (Google Maps iframe) -->
+                <div class="col-lg-6">
+                    <div class="rounded-4 overflow-hidden shadow-lg border border-warning">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12147.927696298308!2d71.24556062508546!3d40.43139915509961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38bb01ae034d911b%3A0x223f825dea1fe5e9!2sMetan%20%22Rishton%20Shox%20Gaz%20Oil%22!5e0!3m2!1sru!2s!4v1785839982954!5m2!1sru!2s" 
+                            width="100%" height="380" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. FOOTER / ALOQA (ASOSIY SAHIFADAGI BILAN BIR XIL) -->
+    <footer id="contact" class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    
+                    <h5 class="text-warning fw-bold mb-3">
+                        <img src="logo.png" alt="Uz Brend Logo" class="me-2" style="height: 45px; width: auto; object-fit: contain;">
+                        Uz Brend G'ishtlari
+                    </h5>
+                    <p>Sifat va ishonchlilik timsoli. Sanoat va qurilish sohasida sizning ishonchli hamkoringiz. Ushbu sohalarda gigant kompaniya bo'lib, o'z hamkorlari va haridorlariga ega!</p>
+                    </div>
+                    <div class="col-md-4">
+                    <h5 class="text-warning fw-bold mb-3">Aloqa</h5>
+                    
+                    <!-- Manzil havolasi (Google Maps) -->
+                    <p>
+                        <a href="https://maps.app.goo.gl/ezuzHSfYMjRPBncZ9" target="_blank" class="text-white text-decoration-none">
+                            <i class="fa-solid fa-location-dot me-2 text-warning"></i> O'zbekiston, Farg'ona, Rishton
+                        </a>
+                    </p>
+                    
+                    <!-- Telefon raqam havolasi -->
+                    <p>
+                        <a href="tel:+998990857383" class="text-white text-decoration-none">
+                            <i class="fa-solid fa-phone me-2 text-warning"></i> +998 (99) 085-73-83
+                        </a>
+                    </p>
+                    
+                    <p>
+                        <a href="tel:+998953961155" class="text-white text-decoration-none">
+                            <i class="fa-solid fa-phone me-2 text-warning" style="opacity: 0;"></i> +998 (95) 396-11-55
+                        </a>
+                    </p>
+
+                    <p>
+                        <a href="tel:+998993455122" class="text-white text-decoration-none">
+                            <i class="fa-solid fa-phone me-2 text-warning" style="opacity: 0;"></i> +998 (99) 345-51-22
+                        </a>
+                    </p>
+                    <p>
+                        <a href="tel:+998770009594" class="text-white text-decoration-none">
+                            <i class="fa-solid fa-phone me-2 text-warning" style="opacity: 0;"></i> +998 (77) 000-95-94
+                        </a>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-warning fw-bold mb-3">Bizni ijtimoiy tarmoqlarda kuzating:</h5>
+                    <div class="d-flex gap-3 fs-3">
+                        <a href="https://t.me/+998953961155" class="text-white"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://instagram.com/uz_brend_gishtlari" class="text-white"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="http://youtube.com/@OtabekAbduraxmonov-1997" class="text-white"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4">
+            <p class="text-center mb-0">&copy; 2026 Uz Brend G'ishtlari. Barcha huquqlar himoyalangan.</p>
+        </div>
+        <div style="position: fixed; bottom: 10px; left: 10px; z-index: 1000; background-color: rgba(0, 0, 0, 0.5); padding: 5px 10px; border-radius: 5px; font-size: 14px;">
+            by <a href="https://t.me/boburahmadqulov" class="eduprint" style="color: rgb(175, 174, 174); text-decoration: none;">@Author</a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

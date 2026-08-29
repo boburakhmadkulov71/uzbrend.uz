@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Uz Brend G'ishtlari - Mahsulotlarimiz</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome Ikonkalar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧱</text></svg>">
+    <style>
+        .page-header {
+            background-position: center center;
+            background-image: url('brick-bg.png');
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .product-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        footer a {
+            transition: color 0.3s ease, transform 0.2s ease;
+            display: inline-block;
+        }
+        footer a:hover {
+            color: #ffc107 !important;
+            transform: translateX(3px);
+        }
+        .product-card .card-img-top {
+            height: 180px;
+            object-fit: contain;
+            padding: 15px;
+            background-color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. NAVIGATION BAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center fw-bold text-warning fs-3" href="index.html">
+                <img src="logo.png" alt="Uz Brend Logo" class="me-2" style="height: 45px; width: auto; object-fit: contain;">
+                <span style="color: #910e0d;">Uz Brend G'ishtlari</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Bosh sahifa</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="gisht.html">Uz Brend G'ishtlari</a></li>
+                    <li class="nav-item"><a class="nav-link" href="beton.html">Uz Beton Mahsulotlari</a></li>
+                    <li class="nav-item"><a class="nav-link" href="xitoy.html">Xitoy Stanoklari</a></li>
+                    <li class="nav-item"><a class="nav-link" href="metan.html">Metan Zapravka</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. SAHIFA SARLAVHASI (BANNER) -->
+    <header class="page-header">
+        <div class="container">
+            <h1 class="fw-bold display-4 text-warning">Uz Brend G'ishtlari</h1>
+            <p class="lead">Mustahkam va yuqori sifatli g'isht mahsulotlari katalogi</p>
+        </div>
+    </header>
+
+    <!-- 3. G'ISHT MAHSULOTLARI KATALOGI -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-5">Bizning G'isht Mahsulotlarimiz</h2>
+            <div class="row g-4">
+
+                <!-- 1-Mahsulot: Standard Pishiq G'isht -->
+                <div class="col-md-6">
+                    <div class="card product-card shadow-sm h-100">
+                        <img src="standart.png" class="card-img-top" alt="Pishiq g'isht">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">"Standard" Pishiq G'isht</h5>
+                            <p class="card-text text-muted">Bino va inshootlar devorlari uchun mo'ljallangan yuqori pishgan poydevor g'ishti.</p>
+                            <ul class="list-unstyled small text-secondary mb-4">
+                                <li><i class="fa-solid fa-check text-warning me-2"></i><strong>O'lchami:</strong> 250 x 120 x 65 mm</li>
+                                <li><i class="fa-solid fa-check text-warning me-2"></i><strong>Mustahkamligi:</strong> M-150</li>
+                            </ul>
+                            <button class="btn btn-warning w-100 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#gishtModal" onclick="selectGishtTur('Standart')">Buyurtma berish</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2-Mahsulot: Paltarashka G'isht -->
+                <div class="col-md-6">
+                    <div class="card product-card shadow-sm h-100">
+                        <img src="paltara.png" class="card-img-top" alt="Gvakli g'isht">
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title fw-bold">"Paltarashka" 19ta Teshikli G'isht</h5>
+                            <p class="card-text text-muted">Yengil vaznli va yuqori shovqin/issiqlik izolyatsiyasiga ega devorbop g'isht.</p>
+                            <ul class="list-unstyled small text-secondary mb-4">
+                                <li><i class="fa-solid fa-check text-warning me-2"></i><strong>O'lchami:</strong> 250 x 120 x 88 mm</li>
+                                <li><i class="fa-solid fa-check text-warning me-2"></i><strong>Afzalligi:</strong> Binoga og'irlik tushirmaydi</li>
+                            </ul>
+                            <button class="btn btn-warning w-100 fw-bold mt-auto" data-bs-toggle="modal" data-bs-target="#gishtModal" onclick="selectGishtTur('Poltorashka')">Buyurtma berish</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Online Forma (Sahifa pastida) -->
+            <div class="row justify-content-center mt-5">
+                <div class="col-md-8">
+                    <div class="card shadow-sm border-0 p-4">
+                        <h3 class="text-center fw-bold mb-4 text-warning"><i class="fa-solid fa-calculator me-2"></i>G'ishtga Onlayn Buyurtma Berish</h3>
+                        <form id="gisht-main-form">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Ismingiz:*</label>
+                                    <input type="text" id="g_name" class="form-control" required placeholder="Ismingizni kiriting">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Telefon raqamingiz:*</label>
+                                    <input type="tel" id="g_phone" 
+                                    class="form-control" 
+                                    value="+998" 
+                                    maxlength="17"
+                                    minlength="13" 
+                                    required 
+                                    title="Iltimos, telefon raqamni ushbu formatda kiriting: +998 90 123 45 67">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">G'isht turi:*</label>
+                                    <select id="g_tur" class="form-select" required>
+                                        <option value="">-- Tanlang --</option>
+                                        <option value="Poltorashka">Poltorashka</option>
+                                        <option value="Standart">Standart</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Obyektingizga kiraoladigan transport turi:*</label>
+                                    <select id="g_mashina" class="form-select" required>
+                                        <option value="">-- Tanlang --</option>
+                                        <option value="Howo">Howo</option>
+                                        <option value="Kamaz">Kamaz</option>
+                                        <option value="Fura">Fura</option>
+                                        <option value="Farqi yo'q">Farqi yo'q</option>
+                                    </select>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Soni qancha?*</label>
+                                    <input type="text" id="g_soni" class="form-control" required placeholder="Masalan: 10 000 dona">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label fw-bold">Qo'shimcha izoh:</label>
+                                    <textarea id="g_comment" class="form-control" rows="3" placeholder="Manzil yoki qo'shimcha istaklaringiz..."></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" id="g_btn" class="btn btn-warning w-100 fw-bold py-2 fs-5">Arizani Yuborish</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 1-MODAL: KARTANING "BUYURTMA BERISH" TUGMASI UCHUN -->
+    <div class="modal fade" id="gishtModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title fw-bold">G'ishtga buyurtma berish</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted small">Buyurtma ma'lumotlarini to'ldiring, mutaxassisimiz siz bilan bog'lanadi.</p>
+                    <form id="gisht-modal-form">
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Ismingiz:*</label>
+                            <input type="text" id="m_g_name" class="form-control" required placeholder="Ismingiz">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Telefon raqamingiz:*</label>
+                            <input type="tel" id="m_g_phone" class="form-control" value="+998" maxlength="17" minlength="13" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">G'isht turi:*</label>
+                            <select id="m_g_tur" class="form-select" required>
+                                <option value="Poltorashka">Poltorashka</option>
+                                <option value="Standart">Standart</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Kira oladigan yuk mashinasi:*</label>
+                            <select id="m_g_mashina" class="form-select" required>
+                                <option value="Howo">Howo</option>
+                                <option value="Kamaz">Kamaz</option>
+                                <option value="Fura">Fura</option>
+                                <option value="Farqi yo'q">Farqi yo'q</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Soni qancha?*</label>
+                            <input type="text" id="m_g_soni" class="form-control" required placeholder="Masalan: 5 000 dona">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label fw-bold">Qo'shimcha izoh:</label>
+                            <textarea id="m_g_comment" class="form-control" rows="2" placeholder="Obyekt manzili..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-warning w-100 fw-bold">Yuborish</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2-MODAL: MA'LUMOTLARNI TASDIQLASH OYNASI -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow">
+                <div class="modal-header bg-warning text-dark">
+                    <h5 class="modal-title fw-bold"><i class="fa-solid fa-clipboard-check me-2"></i>Ma'lumotlaringizni tasdiqlaysizmi?</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-muted small mb-3">Iltimos, kiritgan ma'lumotlaringiz to'g'riligini tekshiring va tasdiqlang:</p>
+                    <ul class="list-group list-group-flush border rounded-3 mb-3">
+                        <li class="list-group-item d-flex justify-content-between"><span class="fw-bold">Ism:</span> <span id="conf_name" class="text-primary"></span></li>
+                        <li class="list-group-item d-flex justify-content-between"><span class="fw-bold">Telefon:</span> <span id="conf_phone" class="text-primary"></span></li>
+                        <li class="list-group-item d-flex justify-content-between"><span class="fw-bold">G'isht turi:</span> <span id="conf_tur" class="text-primary"></span></li>
+                        <li class="list-group-item d-flex justify-content-between"><span class="fw-bold">Transport:</span> <span id="conf_mashina" class="text-primary"></span></li>
+                        <li class="list-group-item d-flex justify-content-between"><span class="fw-bold">Soni:</span> <span id="conf_soni" class="text-primary"></span></li>
+                        <li class="list-group-item d-flex justify-content-between"><span class="fw-bold">Izoh:</span> <span id="conf_comment" class="text-secondary"></span></li>
+                    </ul>
+                </div>
+                <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-pen me-1"></i> O'zgartirish</button>
+                    <button type="button" id="final-send-btn" class="btn btn-warning fw-bold"><i class="fa-solid fa-paper-plane me-1"></i> Tasdiqlayman va Yuboraman</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. FOOTER / ALOQA -->
+    <footer id="contact" class="bg-dark text-white pt-5 pb-3">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <h5 class="text-warning fw-bold mb-3">
+                        <img src="logo.png" alt="Uz Brend Logo" class="me-2" style="height: 45px; width: auto; object-fit: contain;">
+                        Uz Brend G'ishtlari
+                    </h5>
+                    <p>Sifat va ishonchlilik timsoli. Sanoat va qurilish sohasida sizning ishonchli hamkoringiz. Ushbu sohalarda gigant kompaniya bo'lib, o'z hamkorlari va haridorlariga ega!</p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-warning fw-bold mb-3">Aloqa</h5>
+                    <p>
+                        <a href="https://maps.app.goo.gl/ezuzHSfYMjRPBncZ9" target="_blank" class="text-white text-decoration-none">
+                            <i class="fa-solid fa-location-dot me-2 text-warning"></i> O'zbekiston, Farg'ona, Rishton
+                        </a>
+                    </p>
+                    <p>
+                        <a href="tel:+998990857383" class="text-white text-decoration-none">
+                            <i class="fa-solid fa-phone me-2 text-warning"></i> +998 (99) 085-73-83
+                        </a>
+                    </p>
+                    <p>
+                        <a href="tel:+998953961155" class="text-white text-decoration-none">
+                            <i class="fa-solid fa-phone me-2 text-warning" style="opacity: 0;"></i> +998 (95) 396-11-55
+                        </a>
+                    </p>
+                    <p>
+                        <a href="tel:+998993455122" class="text-white text-decoration-none">
+                            <i class="fa-solid fa-phone me-2 text-warning" style="opacity: 0;"></i> +998 (99) 345-51-22
+                        </a>
+                    </p>
+                    <p>
+                        <a href="tel:+998770009594" class="text-white text-decoration-none">
+                            <i class="fa-solid fa-phone me-2 text-warning" style="opacity: 0;"></i> +998 (77) 000-95-94
+                        </a>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h5 class="text-warning fw-bold mb-3">Bizni ijtimoiy tarmoqlarda kuzating:</h5>
+                    <div class="d-flex gap-3 fs-3">
+                        <a href="https://t.me/+998953961155" class="text-white"><i class="fa-brands fa-telegram"></i></a>
+                        <a href="https://instagram.com/uz_brend_gishtlari" class="text-white"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="http://youtube.com/@OtabekAbduraxmonov-1997" class="text-white"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4">
+            <p class="text-center mb-0">&copy; 2026 Uz Brend G'ishtlari. Barcha huquqlar himoyalangan.</p>
+        </div>
+        <div style="position: fixed; bottom: 10px; left: 10px; z-index: 1000; background-color: rgba(0, 0, 0, 0.5); padding: 5px 10px; border-radius: 5px; font-size: 14px;">
+            by <a href="https://t.me/boburahmadqulov" class="eduprint" style="color: rgb(175, 174, 174); text-decoration: none;">@Author</a>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- TELEGRAM BOT VA TASDIQLASH SKRIPTI -->
+    <script>
+        const BOT_TOKEN = "8978641805:AAE6w1QXa3Bke8Ui_4wWYF3a5xwkw1QbxM4";
+        const CHAT_ID = "8543483836";
+
+        // Vaqtincha ma'lumotlarni saqlash obyekti
+        let pendingData = null;
+        let activeForm = null;
+        let isModalForm = false;
+
+        function selectGishtTur(turName) {
+            document.getElementById('m_g_tur').value = turName;
+        }
+
+        // 1. Asosiy sahifadagi forma bosilganda
+        document.getElementById('gisht-main-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            pendingData = {
+                name: document.getElementById('g_name').value,
+                phone: document.getElementById('g_phone').value,
+                tur: document.getElementById('g_tur').value,
+                mashina: document.getElementById('g_mashina').value,
+                soni: document.getElementById('g_soni').value,
+                comment: document.getElementById('g_comment').value || "Yo'q"
+            };
+            activeForm = this;
+            isModalForm = false;
+
+            showConfirmationModal();
+        });
+
+        // 2. Birinchi Modal oynadagi forma bosilganda
+        document.getElementById('gisht-modal-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            pendingData = {
+                name: document.getElementById('m_g_name').value,
+                phone: document.getElementById('m_g_phone').value,
+                tur: document.getElementById('m_g_tur').value,
+                mashina: document.getElementById('m_g_mashina').value,
+                soni: document.getElementById('m_g_soni').value,
+                comment: document.getElementById('m_g_comment').value || "Yo'q"
+            };
+            activeForm = this;
+            isModalForm = true;
+
+            // Oldingi modalni yopamiz
+            const gishtModalEl = document.getElementById('gishtModal');
+            const gishtModal = bootstrap.Modal.getInstance(gishtModalEl);
+            if(gishtModal) gishtModal.hide();
+
+            showConfirmationModal();
+        });
+
+        // Tasdiqlash oynasiga ma'lumotlarni chiqarish va ochish
+        function showConfirmationModal() {
+            document.getElementById('conf_name').innerText = pendingData.name;
+            document.getElementById('conf_phone').innerText = pendingData.phone;
+            document.getElementById('conf_tur').innerText = pendingData.tur;
+            document.getElementById('conf_mashina').innerText = pendingData.mashina;
+            document.getElementById('conf_soni').innerText = pendingData.soni;
+            document.getElementById('conf_comment').innerText = pendingData.comment;
+
+            const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+            confirmModal.show();
+        }
+
+        // 3. Tasdiqlash modalida "Tasdiqlayman va Yuboraman" bosilganda Telegram'ga jonatish
+        document.getElementById('final-send-btn').addEventListener('click', function() {
+            if(!pendingData) return;
+
+            const btn = this;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Yuborilmoqda...';
+
+            const message = `🧱 <b>YANGI ARIZA (G'ISHT):</b>%0A%0A` +
+                            `👤 <b>Ismi:</b> ${encodeURIComponent(pendingData.name)}%0A` +
+                            `📞 <b>Tel:</b> ${encodeURIComponent(pendingData.phone)}%0A` +
+                            `🧱 <b>G'isht turi:</b> ${encodeURIComponent(pendingData.tur)}%0A` +
+                            `🚛 <b>Transport:</b> ${encodeURIComponent(pendingData.mashina)}%0A` +
+                            `🔢 <b>Soni:</b> ${encodeURIComponent(pendingData.soni)}%0A` +
+                            `💬 <b>Izoh:</b> ${encodeURIComponent(pendingData.comment)}`;
+
+            const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${message}&parse_mode=html`;
+
+            fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                if(data.ok) {
+                    alert("Arizangiz muvaffaqiyatli yuborildi! Tez orada siz bilan bog'lanamiz.");
+                    if(activeForm) activeForm.reset();
+                    
+                    const confirmModalEl = document.getElementById('confirmModal');
+                    const confirmModal = bootstrap.Modal.getInstance(confirmModalEl);
+                    if(confirmModal) confirmModal.hide();
+                } else {
+                    alert("Xatolik yuz berdi: " + data.description);
+                }
+            })
+            .catch(err => {
+                alert("Internet ulanishida xatolik yuz berdi.");
+            })
+            .finally(() => {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane me-1"></i> Tasdiqlayman va Yuboraman';
+            });
+        });
+    </script>
+</body>
+</html>
