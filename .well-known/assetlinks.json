@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "app.netlify.melodic_paletas_1d5f67.twa",
+    "sha256_cert_fingerprints": [
+      "76:35:B1:91:DC:7F:22:DD:51:82:17:9B:62:77:44:13:18:C2:E9:A5:EC:DF:B1:5C:8D:D9:37:A6:9E:97:43:9F"
+    ]
+  }
+}] 
