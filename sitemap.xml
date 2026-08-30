@@ -1,8 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://uzbrend.uz/</loc>
-    <lastmod>2026-08-28</lastmod>
-    <priority>1.00</priority>
+    <loc>http://uzbrend.uz/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>http://uzbrend.uz/index.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://uzbrend.uz/xitoy.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://uzbrend.uz/gisht.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://uzbrend.uz/beton.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>http://uzbrend.uz/metan.html</loc>
+    <priority>0.8</priority>
   </url>
 </urlset>
