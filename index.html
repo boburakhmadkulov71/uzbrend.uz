@@ -104,6 +104,157 @@
             color: #ffc107 !important;
             transform: translateX(3px);
         }
+        /* --- JOYLASHUV SECTION USLUBLARI --- */
+        .location-img {
+            height: 250px;
+        }
+
+        @media (min-width: 768px) {
+            .location-img {
+                height: 350px;
+            }
+        }
+
+        .location-img-wrapper img {
+            transition: transform 0.5s ease;
+        }
+        .location-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .map-hover-btn {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            border-radius: 14px;
+            text-decoration: none !important;
+            color: #ffffff !important;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        @media (min-width: 768px) {
+            .map-hover-btn {
+                padding: 18px 24px;
+                border-radius: 16px;
+            }
+        }
+
+        .map-hover-btn .btn-icon {
+            font-size: 1.5rem;
+            margin-right: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .map-hover-btn .btn-icon {
+                font-size: 1.8rem;
+                margin-right: 18px;
+            }
+        }
+
+        .map-hover-btn .btn-text {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .map-hover-btn .btn-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .map-hover-btn .btn-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        .map-hover-btn .btn-sub {
+            font-size: 0.78rem;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+
+        @media (min-width: 768px) {
+            .map-hover-btn .btn-sub {
+                font-size: 0.85rem;
+            }
+        }
+
+        .map-hover-btn .btn-arrow {
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        /* Google & Yandex Button Ranglari va Hover Effect */
+        .btn-google-map {
+            background: linear-gradient(135deg, #4285F4, #2b6cb0);
+        }
+        .btn-google-map:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.35);
+        }
+
+        .btn-yandex-map {
+            background: linear-gradient(135deg, #FC3F1D, #b91c1c);
+        }
+        .btn-yandex-map:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(252, 63, 29, 0.35);
+        }
+
+        /* Hover animatsiyalari */
+        .map-hover-btn:hover .btn-icon {
+            transform: scale(1.15) rotate(-6deg);
+        }
+
+        .map-hover-btn:hover .btn-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        /* Modal zavod tugmalari uslubi */
+        .modal-factory-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            border-radius: 12px;
+            text-decoration: none !important;
+            font-weight: 600;
+            font-size: 1.05rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-beton {
+            background-color: #f8f9fa;
+            color: #333 !important;
+            border: 2px solid #e9ecef;
+        }
+        .btn-beton:hover {
+            background-color: #4b5563;
+            color: #ffffff !important;
+            border-color: #4b5563;
+            transform: translateY(-2px);
+        }
+
+        .btn-gisht {
+            background-color: #f8f9fa;
+            color: #333 !important;
+            border: 2px solid #e9ecef;
+        }
+        .btn-gisht:hover {
+            background-color: #d97706;
+            color: #ffffff !important;
+            border-color: #d97706;
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -229,6 +380,118 @@
             </div>
         </div>
     </section>
+
+    <!-- 5.5. JOYLASHUV SECTION -->
+    <section id="location-section" class="py-4 py-md-5 bg-white">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-4 mb-md-5 fs-3 fs-md-2">Joylashuvni xaritalardan aniqlang:</h2>
+            <div class="row align-items-center g-3 g-md-4">
+                <!-- Chap taraf: Rasm -->
+                <div class="col-12 col-md-6">
+                    <div class="location-img-wrapper overflow-hidden rounded-4 shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Uz Brend Joylashuvi" class="img-fluid w-100 object-fit-cover location-img">
+                    </div>
+                </div>
+                
+                <!-- O'ng taraf: Tugmalar -->
+                <div class="col-12 col-md-6">
+                    <div class="d-flex flex-column gap-3 p-1 p-md-2">
+                        <p class="text-muted fs-6 fs-md-5 mb-1 mb-md-2">
+                            Kompaniyamizga osongina tashrif buyurishingiz uchun o'zingizga qulay xarita ilovasini tanlang:
+                        </p>
+                        
+                        <!-- Google Maps Tugmasi -->
+                        <button type="button" class="map-hover-btn btn-google-map border-0 text-start w-100" data-bs-toggle="modal" data-bs-target="#googleMapModal">
+                            <div class="btn-icon">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                            </div>
+                            <div class="btn-text">
+                                <span class="btn-title">Google Xarita</span>
+                                <span class="btn-sub">Zavod joylashuvini tanlash</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right btn-arrow"></i>
+                        </button>
+
+                        <!-- Yandex Maps Tugmasi -->
+                        <button type="button" class="map-hover-btn btn-yandex-map border-0 text-start w-100" data-bs-toggle="modal" data-bs-target="#yandexMapModal">
+                            <div class="btn-icon">
+                                <i class="fa-solid fa-location-arrow"></i>
+                            </div>
+                            <div class="btn-text">
+                                <span class="btn-title">Yandex Xarita</span>
+                                <span class="btn-sub">Zavod joylashuvini tanlash</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right btn-arrow"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- GOOGLE MAPS MODAL OYNASI -->
+    <div class="modal fade" id="googleMapModal" tabindex="-1" aria-labelledby="googleMapModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header bg-light border-0 pb-0">
+                    <h5 class="modal-title fw-bold text-dark" id="googleMapModalLabel">
+                        <i class="fa-solid fa-map-pin text-primary me-2"></i>Google Maps — Zavodni tanlang
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-muted small mb-3">Google Xaritada qaysi zavodimiz joylashuvini ko'rmoqchisiz?</p>
+                    
+                    <div class="d-grid gap-3">
+                        <a href="https://maps.app.goo.gl/dUBMBxecYKFXDzqv6" target="_blank" class="modal-factory-btn btn-beton">
+                            <i class="fa-solid fa-truck-monster fs-4"></i>
+                            <span>Uz Beton Zavodi</span>
+                            <i class="fa-solid fa-chevron-right ms-auto"></i>
+                        </a>
+
+                        <a href="https://maps.app.goo.gl/LYwwGTLEqgcQoZvW6" target="_blank" class="modal-factory-btn btn-gisht">
+                            <i class="fa-solid fa-cubes fs-4"></i>
+                            <span>Uz Brend G'ishtlari</span>
+                            <i class="fa-solid fa-chevron-right ms-auto"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YANDEX MAPS MODAL OYNASI -->
+    <div class="modal fade" id="yandexMapModal" tabindex="-1" aria-labelledby="yandexMapModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-4 border-0 shadow">
+                <div class="modal-header bg-light border-0 pb-0">
+                    <h5 class="modal-title fw-bold text-dark" id="yandexMapModalLabel">
+                        <i class="fa-solid fa-location-arrow text-danger me-2"></i>Yandex Maps — Zavodni tanlang
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <p class="text-muted small mb-3">Yandex Xaritada qaysi zavodimiz joylashuvini ko'rmoqchisiz?</p>
+                    
+                    <div class="d-grid gap-3">
+                        <!-- Yandex: Uz Beton Zavodi havolasi -->
+                        <a href="https://yandex.uz/maps/-/CTT1EIpa" target="_blank" class="modal-factory-btn btn-beton">
+                            <i class="fa-solid fa-truck-monster fs-4"></i>
+                            <span>Uz Beton Zavodi</span>
+                            <i class="fa-solid fa-chevron-right ms-auto"></i>
+                        </a>
+
+                        <!-- Yandex: Uz Brend G'ishtlari havolasi -->
+                        <a href="https://yandex.uz/maps/-/CTT1E0pk" target="_blank" class="modal-factory-btn btn-gisht">
+                            <i class="fa-solid fa-cubes fs-4"></i>
+                            <span>Uz Brend G'ishtlari</span>
+                            <i class="fa-solid fa-chevron-right ms-auto"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- 5. AFZALLIKLARIMIZ -->
     <section id="advantages" class="py-5 bg-light">
