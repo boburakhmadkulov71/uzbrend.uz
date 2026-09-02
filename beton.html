@@ -45,6 +45,115 @@
             color: #ffc107 !important;
             transform: translateX(3px);
         }
+        @media (min-width: 768px) {
+            .location-img {
+                height: 350px;
+            }
+        }
+
+        .location-img-wrapper img {
+            transition: transform 0.5s ease;
+        }
+        .location-img-wrapper:hover img {
+            transform: scale(1.05);
+        }
+
+        .map-hover-btn {
+            display: flex;
+            align-items: center;
+            padding: 14px 18px;
+            border-radius: 14px;
+            text-decoration: none !important;
+            color: #ffffff !important;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        @media (min-width: 768px) {
+            .map-hover-btn {
+                padding: 18px 24px;
+                border-radius: 16px;
+            }
+        }
+
+        .map-hover-btn .btn-icon {
+            font-size: 1.5rem;
+            margin-right: 14px;
+            transition: transform 0.3s ease;
+        }
+
+        @media (min-width: 768px) {
+            .map-hover-btn .btn-icon {
+                font-size: 1.8rem;
+                margin-right: 18px;
+            }
+        }
+
+        .map-hover-btn .btn-text {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .map-hover-btn .btn-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        @media (min-width: 768px) {
+            .map-hover-btn .btn-title {
+                font-size: 1.2rem;
+            }
+        }
+
+        .map-hover-btn .btn-sub {
+            font-size: 0.78rem;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+
+        @media (min-width: 768px) {
+            .map-hover-btn .btn-sub {
+                font-size: 0.85rem;
+            }
+        }
+
+        .map-hover-btn .btn-arrow {
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+        }
+
+        /* Google & Yandex Button Ranglari va Hover Effect */
+        .btn-google-map {
+            background: linear-gradient(135deg, #4285F4, #2b6cb0);
+        }
+        .btn-google-map:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(66, 133, 244, 0.35);
+        }
+
+        .btn-yandex-map {
+            background: linear-gradient(135deg, #FC3F1D, #b91c1c);
+        }
+        .btn-yandex-map:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(252, 63, 29, 0.35);
+        }
+
+        /* Hover animatsiyalari */
+        .map-hover-btn:hover .btn-icon {
+            transform: scale(1.15) rotate(-6deg);
+        }
+
+        .map-hover-btn:hover .btn-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
     </style>
 </head>
 <body>
@@ -233,6 +342,54 @@
                 </div>
             </div>
 
+        </div>
+    </section>
+
+    <!-- 5.5. JOYLASHUV SECTION (RESPONSIVE COL-12 / COL-MD-6) -->
+    <section id="location-section" class="py-4 py-md-5 bg-white">
+        <div class="container">
+            <h2 class="text-center fw-bold mb-4 mb-md-5 fs-3 fs-md-2">Joylashuvni xaritalardan aniqlang:</h2>
+            <div class="row align-items-center g-3 g-md-4">
+                <!-- Chap taraf: Tugmalar (Telefonda col-12, Planshet va Kompyuterda col-md-6) -->
+                <div class="col-12 col-md-6">
+                    <div class="d-flex flex-column gap-3 p-1 p-md-2">
+                        <p class="text-muted fs-6 fs-md-5 mb-1 mb-md-2">
+                            Kompaniyamizga osongina tashrif buyurishingiz uchun o'zingizga qulay xarita ilovasini tanlang:
+                        </p>
+                        
+                        <!-- Google Maps Tugmasi -->
+                        <a href="https://maps.app.goo.gl/dUBMBxecYKFXDzqv6" target="_blank" class="map-hover-btn btn-google-map">
+                            <div class="btn-icon">
+                                <i class="fa-solid fa-map-location-dot"></i>
+                            </div>
+                            <div class="btn-text">
+                                <span class="btn-title">Google Xarita</span>
+                                <span class="btn-sub">Marshrutni Google Maps'da ochish</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right btn-arrow"></i>
+                        </a>
+
+                        <!-- Yandex Maps Tugmasi -->
+                        <a href="https://yandex.uz/maps/-/CTT1EIpa" target="_blank" class="map-hover-btn btn-yandex-map">
+                            <div class="btn-icon">
+                                <i class="fa-solid fa-location-arrow"></i>
+                            </div>
+                            <div class="btn-text">
+                                <span class="btn-title">Yandex Xarita</span>
+                                <span class="btn-sub">Marshrutni Yandex Maps'da ochish</span>
+                            </div>
+                            <i class="fa-solid fa-arrow-right btn-arrow"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Ong taraf: Rasm (Telefonda col-12, Planshet va Kompyuterda col-md-6) -->
+                <div class="col-12 col-md-6">
+                    <div class="location-img-wrapper overflow-hidden rounded-4 shadow-sm">
+                        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Uz Brend Joylashuvi" class="img-fluid w-100 object-fit-cover location-img">
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
