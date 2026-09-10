@@ -64,7 +64,7 @@ $mainMenu = [
 
 // /start buyrug'i
 if ($text == "/start") {
-    $welcome = "Assalomu alaykum! <b>Uz Brend & Uz Beton</b> rasmiy botiga xush kelibsiz.\n\n"
+    $welcome = "Assalomu alaykum! <b>Uz Brend va Uz Beton</b> rasmiy botiga xush kelibsiz.\n\n"
              . "Bu yerda siz:\n"
              . "• Qurilishingiz uchun g'isht va beton hajmini hisoblashingiz;\n"
              . "• Zavodlarimiz lokatsiyasini olishingiz;\n"
@@ -103,22 +103,32 @@ elseif ($contact) {
     // Adminga xabarnoma yuborish
     $adminAlert = "🔔 <b>YANGI MUROJAAT (ZAYAVKA)!</b>\n\n"
                 . "👤 <b>Ism:</b> {$userName}\n"
-                . "📱 <b>Telefon:</b> +{$phone}\n"
+                . "📱 <b>Telefon:</b> {$phone}\n"
                 . "🆔 <b>Telegram ID:</b> {$chatId}";
     sendMessage($adminId, $adminAlert);
+    
+    sendMessage($chatId, "Agar siz hoziroq bog'lanishni hohlasangiz qo'ng'rioq qiling:\n\nUz G'isht:\n+9980115122\n\nUz Beton:\n+998770009594", $mainMenu);
 }
 
 // 3. MAHSULOTLAR TUGMASI
 elseif ($text == "🧱 Mahsulotlar") {
     $products = "🏭 <b>Bizning asosiy mahsulotlarimiz:</b>\n\n"
               . "🧱 <b>Uz Brend G'ishtlari:</b>\n"
-              . "• Yuqori sifatli pishgan g'ishtlar (M100, M125)\n"
+              . "• Yuqori sifatli 'Paltarashka' 250 x 120 x 88 mm va 'Standart' 250 x 120 x 65 mm pishgan g'ishtlar (M100, M125)\n"
               . "• To'g'ridan-to'g'ri ishlab chiqaruvchidan yetkazib berish\n\n"
               . "🏗 <b>Uz Beton Mahsulotlari:</b>\n"
               . "• Barcha markadagi tayyor beton qorishmalari\n"
-              . "• Avtomikserlar orqali manzilingizga yetkazish\n\n"
+              . "• Beton plitalar\n"
+              . "• Beton kolodetslar\n"
+              . "• Beton FBS-bloklar\n"
+              . "• Beton stolbalar\n"
+              . "• Beton lotoklar\n"
+              . "• Avtokran xizmati\n"
+              . "• Avtobetonanasos xizmati\n"
+              . "• Avtomanipulyator xizmati\n"
+              . "• Avtomixerr xizmati\n"
               . "⚙️ <b>Xitoy Stanoklari:</b>\n"
-              . "• G'isht va qurilish uskunalari to'g'ridan-to'g'ri importi\n\n"
+              . "• Siz hohlagan turdagi uskunalari hamda tehnikalar to'g'ridan-to'g'ri importi\n\n"
               . "<i>Dolzarb narxlar kunlik xomashyo narxlariga qarab belgilanadi. Pastdagi tugma orqali bog'lanishingiz mumkin.</i>";
     sendMessage($chatId, $products, $mainMenu);
 }
@@ -127,10 +137,11 @@ elseif ($text == "🧱 Mahsulotlar") {
 elseif ($text == "📍 Zavodlar Lokatsiyasi") {
     $locations = "📍 <b>Zavodlarimiz manzillari:</b>\n\n"
                . "<b>Uz Beton Rishton:</b>\n"
-               . "• <a href='https://yandex.uz/maps/-/CTT1Elpa'>Yandex Xaritada ochish</a>\n"
-               . "• <a href='https://maps.app.goo.gl/ezuzHSfYMjRPBncZ9'>Google Xaritada ochish</a>\n\n"
+               . "• <a href='https://maps.app.goo.gl/dUBMBxecYKFXDzqv6'>Google Xaritada ochish</a>\n"
+               . "• <a href='https://yandex.uz/maps/-/CTT1EIpa'>Yandex Xaritada ochish</a>\n\n"
                . "<b>Uz Brend G'isht Zavodi:</b>\n"
-               . "• Farg'ona viloyati, Rishton tumani";
+               . "• <a href='https://maps.app.goo.gl/LYwwGTLEqgcQoZvW6'>Google Xaritada ochish</a>\n"
+               . "• <a href='https://yandex.uz/maps/-/CTT1E0pk'>Yandex Xaritada ochish</a>\n"
     sendMessage($chatId, $locations, $mainMenu);
 }
 
