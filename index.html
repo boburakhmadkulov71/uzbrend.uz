@@ -209,7 +209,6 @@
             box-shadow: 0 8px 20px rgba(252, 63, 29, 0.35);
         }
 
-        /* Hover animatsiyalari */
         .map-hover-btn:hover .btn-icon {
             transform: scale(1.15) rotate(-6deg);
         }
@@ -218,6 +217,7 @@
             opacity: 1;
             transform: translateX(0);
         }
+
         /* Modal zavod tugmalari uslubi */
         .modal-factory-btn {
             display: flex;
@@ -255,6 +255,33 @@
             border-color: #d97706;
             transform: translateY(-2px);
         }
+
+        /* Telegram Suzuvchi Tugma (Floating Action Button) */
+        .tg-float-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #0088cc, #00a2ed);
+            color: #ffffff !important;
+            border-radius: 50px;
+            padding: 12px 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(0, 136, 204, 0.4);
+            z-index: 9999;
+            text-decoration: none !important;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .tg-float-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 28px rgba(0, 136, 204, 0.55);
+            color: #ffffff !important;
+        }
+        .tg-float-btn i {
+            font-size: 1.6rem;
+        }
     </style>
 </head>
 <body>
@@ -270,13 +297,18 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item"><a class="nav-link active" href="index.html">Bosh sahifa</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about">Biz haqimizda</a></li>
                     <li class="nav-item"><a class="nav-link" href="gisht.html">Uz Brend G'ishtlari</a></li>
                     <li class="nav-item"><a class="nav-link" href="beton.html">Uz Beton Mahsulotlari</a></li>
                     <li class="nav-item"><a class="nav-link" href="xitoy.html">Xitoy Stanoklari</a></li>
                     <li class="nav-item"><a class="nav-link" href="metan.html">Metan Zapravka</a></li>
+                    <li class="nav-item ms-lg-2 mt-2 mt-lg-0">
+                        <a class="btn btn-outline-info btn-sm px-3 rounded-pill" href="https://t.me/SIZNING_BOT_USERNOMI" target="_blank">
+                            <i class="fa-brands fa-telegram me-1"></i> Bot / Kalkulyator
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -323,7 +355,7 @@
         <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide-next>
+        <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
             <span class="carousel-control-next-icon"></span>
         </button>
     </div>
@@ -375,6 +407,13 @@
                     <a href="metan.html" class="btn btn-warning text-dark btn-custom shadow w-100 py-4">
                         <i class="fa-solid fa-gas-pump fa-2x"></i>
                         <span>Metan Zapravkasi Xizmati</span>
+                    </a>
+                </div>
+                <!-- Telegram Bot va Kalkulyator bloki -->
+                <div class="col-12">
+                    <a href="https://t.me/SIZNING_BOT_USERNOMI" target="_blank" class="btn btn-info text-white btn-custom shadow w-100 py-4" style="background: linear-gradient(135deg, #0088cc, #005f8f);">
+                        <i class="fa-brands fa-telegram fa-2x"></i>
+                        <span>Qurilish Kalkulyatori & Telegram Bot orqali buyurtma berish</span>
                     </a>
                 </div>
             </div>
@@ -474,14 +513,12 @@
                     <p class="text-muted small mb-3">Yandex Xaritada qaysi zavodimiz joylashuvini ko'rmoqchisiz?</p>
                     
                     <div class="d-grid gap-3">
-                        <!-- Yandex: Uz Beton Zavodi havolasi -->
                         <a href="https://yandex.uz/maps/-/CTT1EIpa" target="_blank" class="modal-factory-btn btn-beton">
                             <i class="fa-solid fa-truck-monster fs-4"></i>
                             <span>Uz Beton Zavodi</span>
                             <i class="fa-solid fa-chevron-right ms-auto"></i>
                         </a>
 
-                        <!-- Yandex: Uz Brend G'ishtlari havolasi -->
                         <a href="https://yandex.uz/maps/-/CTT1E0pk" target="_blank" class="modal-factory-btn btn-gisht">
                             <i class="fa-solid fa-cubes fs-4"></i>
                             <span>Uz Brend G'ishtlari</span>
@@ -565,9 +602,11 @@
                 <div class="col-md-4">
                     <h5 class="text-warning fw-bold mb-3">Bizni ijtimoiy tarmoqlarda kuzating:</h5>
                     <div class="d-flex gap-3 fs-3">
-                        <a href="https://t.me/+998953961155" class="text-white"><i class="fa-brands fa-telegram"></i></a>
-                        <a href="https://instagram.com/uz_brend_gishtlari" class="text-white"><i class="fa-brands fa-instagram"></i></a>
-                        <a href="http://youtube.com/@OtabekAbduraxmonov-1997" class="text-white"><i class="fa-brands fa-youtube"></i></a>
+                        <!-- Rasmiy Bot havolasi -->
+                        <a href="https://t.me/SIZNING_BOT_USERNOMI" target="_blank" class="text-white" title="Rasmiy Bot"><i class="fa-brands fa-telegram text-info"></i></a>
+                        <a href="https://t.me/+998953961155" target="_blank" class="text-white" title="Telegram Menejer"><i class="fa-regular fa-paper-plane"></i></a>
+                        <a href="https://instagram.com/uz_brend_gishtlari" target="_blank" class="text-white" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="http://youtube.com/@OtabekAbduraxmonov-1997" target="_blank" class="text-white" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
                     </div>
                 </div>
             </div>
@@ -579,13 +618,19 @@
         </div>
     </footer>
 
+    <!-- Suzuvchi Telegram Tugmasi (O'ng pastki burchakda) -->
+    <a href="https://t.me/uzbrenduz_bot" target="_blank" class="tg-float-btn" title="Telegram bot orqali bog'lanish">
+        <i class="fa-brands fa-telegram"></i>
+        <span>Rasmiy Bot</span>
+    </a>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
       if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
           navigator.serviceWorker.register('/sw.js')
-            .then((reg) => console.log('Service Worker o'rnatildi:', reg.scope))
+            .then((reg) => console.log("Service Worker o'rnatildi:", reg.scope))
             .catch((err) => console.log('Service Worker xatosi:', err));
         });
       }
