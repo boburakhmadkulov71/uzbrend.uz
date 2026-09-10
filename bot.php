@@ -1,7 +1,7 @@
 <?php
 // bot.php
 $botToken = "8820976937:AAFK2znnSNxRuMPEkOmzXClGeWRfR6ngCGs";
-$adminId = "8978641805"; // "Uz Brend | ARIZALAR" guruh/chat ID raqami
+$adminId = "8543483836"; // "Uz Brend | ARIZALAR" guruh/chat ID raqami
 $miniAppUrl = "https://uzbrend.uz/calc.html";
 
 $website = "https://api.telegram.org/bot".$botToken;
@@ -229,7 +229,7 @@ elseif ($callbackData) {
     $replyToUser = "✅ Qabul qilindi! <b>{$chosenCat}</b> bo'yicha mutaxassisimiz tez orada siz bilan bog'lanadi.\n\n"
                  . "Agar siz hoziroq bog'lanishni xohlasangiz qo'ng'iroq qiling:\n\n"
                  . "🧱 <b>Uz G'isht:</b>\n+998990115122\n\n"
-                 . "🏗 <b>Uz Beton:</b>\n+998770009594\n\n";
+                 . "🏗 <b>Uz Beton:</b>\n+998770009594\n\n"
                  . "🏗 <b>Xitoy stanoklari:</b>\n+998953781170\n\n";
     sendMessage($chatId, $replyToUser, $mainMenu);
 
