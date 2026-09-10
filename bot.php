@@ -170,7 +170,7 @@ elseif ($webAppData) {
                  . "📐 Umumiy maydon: {$data['maydon']}\n"
                  . "🧱 <b>Kerakli g'isht: {$data['jami']}</b>\n\n"
                  . "<i>Tez orada mutaxassisimiz raqamingizga bog'lanib, eng so'nggi narxlarni ma'lum qiladi.</i>\n\n"
-                 . "Shoshilinch bo'lsa:\n📞 Uz G'isht: +9980115122";
+                 . "Shoshilinch bo'lsa:\n📞 Uz G'isht: +998990115122";
 
         $adminMsg = "🧱 <b>YANGI ARIZA (G'ISHT KALKULYATORI):</b>\n\n"
                   . "👤 <b>Ismi:</b> {$userName}\n"
@@ -228,8 +228,9 @@ elseif ($callbackData) {
     // Mijozga tasdiq va to'g'ridan-to'g'ri raqamlar
     $replyToUser = "✅ Qabul qilindi! <b>{$chosenCat}</b> bo'yicha mutaxassisimiz tez orada siz bilan bog'lanadi.\n\n"
                  . "Agar siz hoziroq bog'lanishni xohlasangiz qo'ng'iroq qiling:\n\n"
-                 . "🧱 <b>Uz G'isht:</b>\n+9980115122\n\n"
-                 . "🏗 <b>Uz Beton:</b>\n+998770009594";
+                 . "🧱 <b>Uz G'isht:</b>\n+998990115122\n\n"
+                 . "🏗 <b>Uz Beton:</b>\n+998770009594\n\n";
+                 . "🏗 <b>Xitoy stanoklari:</b>\n+998953781170\n\n";
     sendMessage($chatId, $replyToUser, $mainMenu);
 
     // ARIZALAR GURUHIGA YUBORISH
