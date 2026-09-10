@@ -4,7 +4,7 @@ $botToken = "8820976937:AAFK2znnSNxRuMPEkOmzXClGeWRfR6ngCGs";
 $adminId = "8543483836"; // O'zingizning Telegram chat ID yoki guruh ID raqamingiz
 $miniAppUrl = "https://uzbrend.uz/calc.html"; // calc.html yuklangan havola
 
-$website = "https://uzbrend.uz/calc.html".$botToken;
+$website = "https://api.telegram.org/bot".$botToken;
 
 $input = file_get_contents('php://input');
 $update = json_decode($input, true);
@@ -24,12 +24,22 @@ function sendMessage($chatId, $message, $keyboard = null) {
     $postData = [
         'chat_id' => $chatId,
         'text' => $message,
-        'parse_mode' => 'HTML'
+        'parse_mode' => 'HTML',
+        'disable_web_page_preview' => true
     ];
     if ($keyboard) {
         $postData['reply_markup'] = json_encode($keyboard);
     }
-    file_get_contents($website . "/sendMessage?" . http_build_query($postData));
+
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $website . "/sendMessage");
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($postData));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $res = curl_exec($ch);
+    curl_close($ch);
+    return $res;
 }
 
 // Bosh menyu klaviaturasi
