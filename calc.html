@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Qurilish Kalkulyatori — Uz Brend</title>
+    <!-- Telegram Web App SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: var(--tg-theme-bg-color, #f8f9fa);
+            color: var(--tg-theme-text-color, #212529);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            padding: 15px;
+        }
+        .calc-card {
+            background-color: var(--tg-theme-secondary-bg-color, #ffffff);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        .nav-pills .nav-link {
+            border-radius: 10px;
+            font-weight: 600;
+            color: #6c757d;
+        }
+        .nav-pills .nav-link.active {
+            background-color: #b91c1c;
+            color: #fff;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #ffffff;
+            border-radius: 14px;
+            padding: 16px;
+            text-align: center;
+            margin-top: 15px;
+        }
+        .result-val {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: #facc15;
+        }
+        .btn-send {
+            background-color: #16a34a;
+            color: #ffffff;
+            font-weight: 700;
+            border-radius: 12px;
+            padding: 14px;
+            width: 100%;
+            border: none;
+            transition: 0.2s;
+        }
+        .btn-send:hover {
+            background-color: #15803d;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container-fluid p-0">
+        <!-- Tablar: G'isht yoki Beton -->
+        <ul class="nav nav-pills nav-fill mb-3" id="calcTabs" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" id="gisht-tab" data-bs-toggle="pill" data-bs-target="#gisht-pane">
+                    <i class="fa-solid fa-cubes me-1"></i> G'isht
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" id="beton-tab" data-bs-toggle="pill" data-bs-target="#beton-pane">
+                    <i class="fa-solid fa-truck-monster me-1"></i> Beton
+                </button>
+            </li>
+        </ul>
+
+        <!-- G'isht Kalkulyatori -->
+        <div class="tab-content">
+            <div class="tab-pane fade show active" id="gisht-pane">
+                <div class="calc-card">
+                    <h6 class="fw-bold mb-3"><i class="fa-solid fa-ruler-combined text-danger me-2"></i>Devor o'lchamlari</h6>
+                    
+                    <div class="mb-2">
+                        <label class="form-label small text-muted">Devor umumiy uzunligi (metr):</label>
+                        <input type="number" id="g_len" class="form-control" placeholder="Masalan: 40" oninput="calcGisht()">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label small text-muted">Devor balandligi (metr):</label>
+                        <input type="number" id="g_height" class="form-control" placeholder="Masalan: 3" value="3" oninput="calcGisht()">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-muted">Devor qalinligi:</label>
+                        <select id="g_thick" class="form-select" onchange="calcGisht()">
+                            <option value="1">1 g'isht (25 sm - 102 dona/m²)</option>
+                            <option value="1.5" selected>1.5 g'isht (38 sm - 153 dona/m²)</option>
+                            <option value="0.5">Yarim g'isht (12 sm - 51 dona/m²)</option>
+                            <option value="2">2 g'isht (51 sm - 204 dona/m²)</option>
+                        </select>
+                    </div>
+
+                    <div class="result-box">
+                        <div class="small text-light opacity-75">Kerakli g'isht miqdori:</div>
+                        <div class="result-val" id="gisht_result">0 dona</div>
+                        <div class="small text-light opacity-50" id="gisht_area">Maydon: 0 m²</div>
+                    </div>
+
+                    <button class="btn-send mt-3" onclick="sendToBot('gisht')">
+                        <i class="fa-brands fa-telegram me-2"></i>Hisobni botga yuborish
+                    </button>
+                </div>
+            </div>
+
+            <!-- Beton Kalkulyatori -->
+            <div class="tab-pane fade" id="beton-pane">
+                <div class="calc-card">
+                    <h6 class="fw-bold mb-3"><i class="fa-solid fa-shapes text-primary me-2"></i>Beton quyish o'lchamlari</h6>
+                    
+                    <div class="mb-2">
+                        <label class="form-label small text-muted">Uzunligi (metr):</label>
+                        <input type="number" id="b_len" class="form-control" placeholder="Masalan: 15" oninput="calcBeton()">
+                    </div>
+
+                    <div class="mb-2">
+                        <label class="form-label small text-muted">Kengligi (metr):</label>
+                        <input type="number" id="b_width" class="form-control" placeholder="Masalan: 0.5" oninput="calcBeton()">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label small text-muted">Balandligi / Chuqurligi (metr):</label>
+                        <input type="number" id="b_height" class="form-control" placeholder="Masalan: 0.8" oninput="calcBeton()">
+                    </div>
+
+                    <div class="result-box">
+                        <div class="small text-light opacity-75">Kerakli beton hajmi:</div>
+                        <div class="result-val" id="beton_result">0 m³</div>
+                    </div>
+
+                    <button class="btn-send mt-3" onclick="sendToBot('beton')">
+                        <i class="fa-brands fa-telegram me-2"></i>Hisobni botga yuborish
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Telegram oynasini to'liq ochish
+
+        let lastGishtData = null;
+        let lastBetonData = null;
+
+        function calcGisht() {
+            const len = parseFloat(document.getElementById('g_len').value) || 0;
+            const h = parseFloat(document.getElementById('g_height').value) || 0;
+            const thick = parseFloat(document.getElementById('g_thick').value) || 1.5;
+
+            const area = len * h;
+            // 1 m² devor uchun standart 250x120x65 g'isht me'yorlari (qorishma hisobi bilan):
+            // 0.5 g'isht ≈ 51 dona, 1 g'isht ≈ 102 dona, 1.5 g'isht ≈ 153 dona, 2 g'isht ≈ 204 dona
+            const ratePerM2 = thick * 102;
+            const totalBricks = Math.round(area * ratePerM2);
+
+            document.getElementById('gisht_result').innerText = totalBricks.toLocaleString() + " dona";
+            document.getElementById('gisht_area').innerText = "Maydon: " + area.toFixed(1) + " m²";
+
+            lastGishtData = {
+                tur: "G'isht",
+                uzunlik: len,
+                balandlik: h,
+                qalinlik: thick + " g'isht",
+                maydon: area.toFixed(1) + " m²",
+                jami: totalBricks.toLocaleString() + " dona"
+            };
+        }
+
+        function calcBeton() {
+            const l = parseFloat(document.getElementById('b_len').value) || 0;
+            const w = parseFloat(document.getElementById('b_width').value) || 0;
+            const h = parseFloat(document.getElementById('b_height').value) || 0;
+
+            const volume = (l * w * h).toFixed(2);
+            document.getElementById('beton_result').innerText = volume + " m³";
+
+            lastBetonData = {
+                tur: "Beton",
+                uzunlik: l,
+                kenglik: w,
+                balandlik: h,
+                jami: volume + " m³"
+            };
+        }
+
+        function sendToBot(type) {
+            let dataToSend = type === 'gisht' ? lastGishtData : lastBetonData;
+            if (!dataToSend) {
+                alert("Iltimos, avval o'lchamlarni kiriting!");
+                return;
+            }
+            // Botga natijani JSON ko'rinishida qaytarish
+            tg.sendData(JSON.stringify(dataToSend));
+        }
+    </script>
+</body>
+</html>
