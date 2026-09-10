@@ -65,6 +65,32 @@
             color: #ffc107 !important;
             transform: translateX(3px);
         }
+        /* Telegram Suzuvchi Tugma (Floating Action Button) */
+        .tg-float-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background: linear-gradient(135deg, #0088cc, #00a2ed);
+            color: #ffffff !important;
+            border-radius: 50px;
+            padding: 12px 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 24px rgba(0, 136, 204, 0.4);
+            z-index: 9999;
+            text-decoration: none !important;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        .tg-float-btn:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 12px 28px rgba(0, 136, 204, 0.55);
+            color: #ffffff !important;
+        }
+        .tg-float-btn i {
+            font-size: 1.6rem;
+        }
     </style>
 </head>
 <body>
@@ -465,6 +491,11 @@
             by <a href="https://t.me/boburahmadqulov" class="eduprint" style="color: rgb(175, 174, 174); text-decoration: none;">@Author</a>
         </div>
     </footer>
+
+    <a href="https://t.me/uzbrenduz_bot" target="_blank" class="tg-float-btn" title="Telegram bot orqali bog'lanish">
+        <i class="fa-brands fa-telegram"></i>
+        <span>Rasmiy Bot</span>
+    </a>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
