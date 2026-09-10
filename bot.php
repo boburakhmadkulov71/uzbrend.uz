@@ -1,8 +1,8 @@
 <?php
 // bot.php
 $botToken = "8820976937:AAFK2znnSNxRuMPEkOmzXClGeWRfR6ngCGs";
-$adminId = "8543483836"; // O'zingizning Telegram chat ID yoki guruh ID raqamingiz
-$miniAppUrl = "https://uzbrend.uz/calc.html"; // calc.html yuklangan havola
+$adminId = "8978641805"; // "Uz Brend | ARIZALAR" guruh/chat ID raqami
+$miniAppUrl = "https://uzbrend.uz/calc.html";
 
 $website = "https://api.telegram.org/bot".$botToken;
 
@@ -13,12 +13,34 @@ if (!$update) {
     exit();
 }
 
-$chatId = $update["message"]["chat"]["id"] ?? null;
-$text = $update["message"]["text"] ?? null;
-$contact = $update["message"]["contact"] ?? null;
-$webAppData = $update["message"]["web_app_data"]["data"] ?? null;
+$message = $update["message"] ?? null;
+$callbackQuery = $update["callback_query"] ?? null;
 
-// Funksiya: Xabar yuborish
+$chatId = $message["chat"]["id"] ?? $callbackQuery["message"]["chat"]["id"] ?? null;
+$text = $message["text"] ?? null;
+$contact = $message["contact"] ?? null;
+$webAppData = $message["web_app_data"]["data"] ?? null;
+$callbackData = $callbackQuery["data"] ?? null;
+
+// Foydalanuvchi raqamini saqlash va tekshirish (users.json orqali)
+$dbFile = __DIR__ . '/users.json';
+function getUserPhone($chatId, $dbFile) {
+    if (!file_exists($dbFile)) return null;
+    $data = json_decode(file_get_contents($dbFile), true) ?: [];
+    return $data[$chatId]['phone'] ?? null;
+}
+
+function saveUser($chatId, $name, $phone, $dbFile) {
+    $data = file_exists($dbFile) ? (json_decode(file_get_contents($dbFile), true) ?: []) : [];
+    $data[$chatId] = [
+        'name' => $name,
+        'phone' => $phone,
+        'updated_at' => date('Y-m-d H:i:s')
+    ];
+    file_put_contents($dbFile, json_encode($data, JSON_PRETTY_PRINT));
+}
+
+// Xabar yuborish funksiyasi (cURL orqali)
 function sendMessage($chatId, $message, $keyboard = null) {
     global $website;
     $postData = [
@@ -42,7 +64,31 @@ function sendMessage($chatId, $message, $keyboard = null) {
     return $res;
 }
 
-// Bosh menyu klaviaturasi
+// Callback javob qaytarish
+function answerCallback($callbackQueryId) {
+    global $website;
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $website . "/answerCallbackQuery");
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query(['callback_query_id' => $callbackQueryId]));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_exec($ch);
+    curl_close($ch);
+}
+
+// Kontakt so'rash klaviaturasi
+$contactKeyboard = [
+    'keyboard' => [
+        [
+            ['text' => '📱 Raqamni yuborish', 'request_contact' => true]
+        ]
+    ],
+    'resize_keyboard' => true,
+    'one_time_keyboard' => true
+];
+
+// Asosiy menyu
 $mainMenu = [
     'keyboard' => [
         [
@@ -53,7 +99,7 @@ $mainMenu = [
             ['text' => '📍 Zavodlar Lokatsiyasi']
         ],
         [
-            ['text' => '📞 Dolzarb Narxni Bilish / Bog\'lanish', 'request_contact' => true]
+            ['text' => '📞 Dolzarb Narxni Bilish']
         ],
         [
             ['text' => '🌐 Rasmiy Saytimiz']
@@ -62,55 +108,141 @@ $mainMenu = [
     'resize_keyboard' => true
 ];
 
-// /start buyrug'i
+// Qiziqish yo'nalishlari (Inline tugmalar)
+$categoriesInlineKeyboard = [
+    'inline_keyboard' => [
+        [
+            ['text' => '🏗 Beton', 'callback_data' => 'cat_beton'],
+            ['text' => '🧱 G\'ishtlar', 'callback_data' => 'cat_gisht']
+        ],
+        [
+            ['text' => '⚙️ Xitoy stanoklari', 'callback_data' => 'cat_stanok'],
+            ['text' => '📦 Barchasi', 'callback_data' => 'cat_all']
+        ]
+    ]
+];
+
+$userPhone = getUserPhone($chatId, $dbFile);
+
+// 1. /start BUYRUG'I
 if ($text == "/start") {
-    $welcome = "Assalomu alaykum! <b>Uz Brend va Uz Beton</b> rasmiy botiga xush kelibsiz.\n\n"
-             . "Bu yerda siz:\n"
-             . "• Qurilishingiz uchun g'isht va beton hajmini hisoblashingiz;\n"
-             . "• Zavodlarimiz lokatsiyasini olishingiz;\n"
-             . "• Bugungi kundagi eng dolzarb narxlarni bilishingiz mumkin.";
-    sendMessage($chatId, $welcome, $mainMenu);
-}
-
-// 1. MINI APP'DAN KELGAN HISOB-KITOB NATIJASI
-elseif ($webAppData) {
-    $data = json_decode($webAppData, true);
-    
-    if ($data['tur'] == "G'isht") {
-        $msg = "✅ <b>G'isht hisob-kitobi qabul qilindi:</b>\n\n"
-             . "📏 O'lcham: {$data['uzunlik']}m x {$data['balandlik']}m ({$data['qalinlik']})\n"
-             . "📐 Umumiy maydon: {$data['maydon']}\n"
-             . "🧱 <b>Kerakli g'isht: {$data['jami']}</b>\n\n"
-             . "<i>Bugungi kundagi narx va yetkazib berish shartlarini bilish uchun quyidagi <b>'📞 Dolzarb Narxni Bilish'</b> tugmasini bosing.</i>";
+    if ($userPhone) {
+        $welcome = "Assalomu alaykum! <b>Uz Brend va Uz Beton</b> rasmiy botiga xush kelibsiz.\n\n"
+                 . "Kerakli bo'limni quyidagi menyudan tanlang:";
+        sendMessage($chatId, $welcome, $mainMenu);
     } else {
-        $msg = "✅ <b>Beton hisob-kitobi qabul qilindi:</b>\n\n"
-             . "📏 O'lcham: {$data['uzunlik']}m x {$data['kenglik']}m x {$data['balandlik']}m\n"
-             . "🚚 <b>Kerakli beton: {$data['jami']}</b>\n\n"
-             . "<i>Bugungi kundagi narx va yetkazib berish shartlarini bilish uchun quyidagi <b>'📞 Dolzarb Narxni Bilish'</b> tugmasini bosing.</i>";
+        $welcome = "Assalomu alaykum! <b>Uz Brend va Uz Beton</b> rasmiy botiga xush kelibsiz.\n\n"
+                 . "Bot xizmatlaridan foydalanish va dolzarb narxlarni olish uchun quyidagi tugma orqali <b>telefon raqamingizni yuboring:</b>";
+        sendMessage($chatId, $welcome, $contactKeyboard);
     }
-    
-    sendMessage($chatId, $msg, $mainMenu);
 }
 
-// 2. MIJOZ KONTAKT YUBORGANDA (BUYURTMA / ZAYAVKA)
+// 2. FOYDALANUVCHI RAQAMINI YUBORGANDA
 elseif ($contact) {
     $phone = $contact['phone_number'];
-    $userName = $contact['first_name'] ?? 'Mijoz';
+    if (strpos($phone, '+') !== 0) $phone = '+' . $phone;
+    $userName = htmlspecialchars($contact['first_name'] ?? 'Mijoz');
+
+    saveUser($chatId, $userName, $phone, $dbFile);
 
     // Foydalanuvchiga tasdiq
-    sendMessage($chatId, "Rahmat, <b>{$userName}</b>! Telefon raqamingiz qabul qilindi.\nTez orada mutaxassisimiz siz bilan bog'lanib, eng so'nggi narxlarni ma'lum qiladi.", $mainMenu);
+    $confirmMsg = "Rahmat, <b>{$userName}</b>! Telefon raqamingiz qabul qilindi.\n\n"
+                . "Endi kalkulyatordan hisoblashingiz yoki mahsulotlar bo'yicha ariza qoldirishingiz mumkin:";
+    sendMessage($chatId, $confirmMsg, $mainMenu);
 
     // Adminga xabarnoma yuborish
-    $adminAlert = "🔔 <b>YANGI MUROJAAT (ZAYAVKA)!</b>\n\n"
+    $adminAlert = "🔔 <b>YANGI FOYDALANUVCHI (RO'YXATDAN O'TDI):</b>\n\n"
                 . "👤 <b>Ism:</b> {$userName}\n"
-                . "📱 <b>Telefon:</b> {$phone}\n"
-                . "🆔 <b>Telegram ID:</b> {$chatId}";
+                . "📞 <b>Telefon:</b> {$phone}\n"
+                . "🆔 <b>Telegram ID:</b> <code>{$chatId}</code>";
     sendMessage($adminId, $adminAlert);
-    
-    sendMessage($chatId, "Agar siz hoziroq bog'lanishni hohlasangiz qo'ng'rioq qiling:\n\nUz G'isht:\n+9980115122\n\nUz Beton:\n+998770009594", $mainMenu);
 }
 
-// 3. MAHSULOTLAR TUGMASI
+// 3. KALKULYATOR (MINI APP) NATIJASI KELGANDA
+elseif ($webAppData) {
+    $data = json_decode($webAppData, true);
+    $userName = htmlspecialchars($message['from']['first_name'] ?? 'Mijoz');
+    $phoneText = $userPhone ? $userPhone : "Raqam yuborilmagan";
+
+    if ($data['tur'] == "G'isht") {
+        $userMsg = "✅ <b>G'isht hisob-kitobingiz qabul qilindi va mutaxassisga yo'naltirildi!</b>\n\n"
+                 . "📏 O'lcham: {$data['uzunlik']}m x {$data['balandlik']}m ({$data['qalinlik']})\n"
+                 . "📐 Umumiy maydon: {$data['maydon']}\n"
+                 . "🧱 <b>Kerakli g'isht: {$data['jami']}</b>\n\n"
+                 . "<i>Tez orada mutaxassisimiz raqamingizga bog'lanib, eng so'nggi narxlarni ma'lum qiladi.</i>\n\n"
+                 . "Shoshilinch bo'lsa:\n📞 Uz G'isht: +9980115122";
+
+        $adminMsg = "🧱 <b>YANGI ARIZA (G'ISHT KALKULYATORI):</b>\n\n"
+                  . "👤 <b>Ismi:</b> {$userName}\n"
+                  . "📞 <b>Tel:</b> {$phoneText}\n"
+                  . "🧱 <b>G'isht turi:</b> {$data['qalinlik']}\n"
+                  . "📏 <b>O'lcham:</b> {$data['uzunlik']}m x {$data['balandlik']}m\n"
+                  . "📐 <b>Maydon:</b> {$data['maydon']}\n"
+                  . "🔢 <b>Soni/Hajmi:</b> {$data['jami']}\n"
+                  . "🆔 <b>Telegram ID:</b> <code>{$chatId}</code>";
+    } else {
+        $userMsg = "✅ <b>Beton hisob-kitobingiz qabul qilindi va mutaxassisga yo'naltirildi!</b>\n\n"
+                 . "📏 O'lcham: {$data['uzunlik']}m x {$data['kenglik']}m x {$data['balandlik']}m\n"
+                 . "🚚 <b>Kerakli beton: {$data['jami']}</b>\n\n"
+                 . "<i>Tez orada mutaxassisimiz raqamingizga bog'lanib, eng so'nggi narxlarni ma'lum qiladi.</i>\n\n"
+                 . "Shoshilinch bo'lsa:\n📞 Uz Beton: +998770009594";
+
+        $adminMsg = "🏗 <b>YANGI ARIZA (BETON KALKULYATORI):</b>\n\n"
+                  . "👤 <b>Ismi:</b> {$userName}\n"
+                  . "📞 <b>Tel:</b> {$phoneText}\n"
+                  . "🏢 <b>Mahsulot/Xizmat:</b> Tayyor Beton\n"
+                  . "📏 <b>O'lchamlari:</b> {$data['uzunlik']}m x {$data['kenglik']}m x {$data['balandlik']}m\n"
+                  . "🔢 <b>Soni/Hajmi:</b> {$data['jami']}\n"
+                  . "🆔 <b>Telegram ID:</b> <code>{$chatId}</code>";
+    }
+
+    sendMessage($chatId, $userMsg, $mainMenu);
+    sendMessage($adminId, $adminMsg);
+}
+
+// 4. "DOLZARB NARXNI BILISH" BOSILGANDA (YO'NALISH SO'RASH)
+elseif ($text == "📞 Dolzarb Narxni Bilish" || $text == "📞 Dolzarb Narxni Bilish / Bog'lanish") {
+    if (!$userPhone) {
+        sendMessage($chatId, "Iltimos, narxlarni bilish uchun avval telefon raqamingizni yuboring:", $contactKeyboard);
+    } else {
+        sendMessage($chatId, "Sizni aynan qaysi mahsulotlarimiz qiziqtiradi?", $categoriesInlineKeyboard);
+    }
+}
+
+// 5. INLINE TUGMADAN YO'NALISH TANLANGANDA -> ARIZALARGA YUBORISH
+elseif ($callbackData) {
+    answerCallback($callbackQuery["id"]);
+    $from = $callbackQuery["from"];
+    $userName = htmlspecialchars($from['first_name'] ?? 'Mijoz');
+    $phoneText = $userPhone ? $userPhone : "Raqam mavjud emas";
+
+    $categories = [
+        'cat_beton' => "🏗 Beton",
+        'cat_gisht' => "🧱 G'ishtlar",
+        'cat_stanok' => "⚙️ Xitoy stanoklari",
+        'cat_all' => "📦 Barchasi"
+    ];
+
+    $chosenCat = $categories[$callbackData] ?? "Qurilish mollari";
+
+    // Mijozga tasdiq va to'g'ridan-to'g'ri raqamlar
+    $replyToUser = "✅ Qabul qilindi! <b>{$chosenCat}</b> bo'yicha mutaxassisimiz tez orada siz bilan bog'lanadi.\n\n"
+                 . "Agar siz hoziroq bog'lanishni xohlasangiz qo'ng'iroq qiling:\n\n"
+                 . "🧱 <b>Uz G'isht:</b>\n+9980115122\n\n"
+                 . "🏗 <b>Uz Beton:</b>\n+998770009594";
+    sendMessage($chatId, $replyToUser, $mainMenu);
+
+    // ARIZALAR GURUHIGA YUBORISH
+    $adminNotice = "🔔 <b>YANGI ARIZA (DOLZARB NARX SO'ROVI):</b>\n\n"
+                 . "👤 <b>Ismi:</b> {$userName}\n"
+                 . "📞 <b>Tel:</b> {$phoneText}\n"
+                 . "🏢 <b>Qiziqqan mahsuloti:</b> {$chosenCat}\n"
+                 . "💬 <b>Izoh:</b> Narx va shartlarni bilmoqchi\n"
+                 . "🆔 <b>Telegram ID:</b> <code>{$chatId}</code>";
+    sendMessage($adminId, $adminNotice);
+}
+
+// 6. MAHSULOTLAR TUGMASI
 elseif ($text == "🧱 Mahsulotlar") {
     $products = "🏭 <b>Bizning asosiy mahsulotlarimiz:</b>\n\n"
               . "🧱 <b>Uz Brend G'ishtlari:</b>\n"
@@ -126,14 +258,14 @@ elseif ($text == "🧱 Mahsulotlar") {
               . "• Avtokran xizmati\n"
               . "• Avtobetonanasos xizmati\n"
               . "• Avtomanipulyator xizmati\n"
-              . "• Avtomixerr xizmati\n"
+              . "• Avtomixerr xizmati\n\n"
               . "⚙️ <b>Xitoy Stanoklari:</b>\n"
-              . "• Siz hohlagan turdagi uskunalari hamda tehnikalar to'g'ridan-to'g'ri importi\n\n"
+              . "• Siz xohlagan turdagi uskunalar hamda texnikalar to'g'ridan-to'g'ri importi\n\n"
               . "<i>Dolzarb narxlar kunlik xomashyo narxlariga qarab belgilanadi. Pastdagi tugma orqali bog'lanishingiz mumkin.</i>";
     sendMessage($chatId, $products, $mainMenu);
 }
 
-// 4. LOKATSIYA TUGMASI
+// 7. LOKATSIYA TUGMASI
 elseif ($text == "📍 Zavodlar Lokatsiyasi") {
     $locations = "📍 <b>Zavodlarimiz manzillari:</b>\n\n"
                . "<b>Uz Beton Rishton:</b>\n"
@@ -141,11 +273,11 @@ elseif ($text == "📍 Zavodlar Lokatsiyasi") {
                . "• <a href='https://yandex.uz/maps/-/CTT1EIpa'>Yandex Xaritada ochish</a>\n\n"
                . "<b>Uz Brend G'isht Zavodi:</b>\n"
                . "• <a href='https://maps.app.goo.gl/LYwwGTLEqgcQoZvW6'>Google Xaritada ochish</a>\n"
-               . "• <a href='https://yandex.uz/maps/-/CTT1E0pk'>Yandex Xaritada ochish</a>\n"
+               . "• <a href='https://yandex.uz/maps/-/CTT1E0pk'>Yandex Xaritada ochish</a>";
     sendMessage($chatId, $locations, $mainMenu);
 }
 
-// 5. SAYT HAVOLASI
+// 8. SAYT HAVOLASI
 elseif ($text == "🌐 Rasmiy Saytimiz") {
     sendMessage($chatId, "Rasmiy veb-saytimiz: https://uzbrend.uz", $mainMenu);
 }
